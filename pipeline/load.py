@@ -2,11 +2,12 @@ import sqlite3
 import os
 
 def load_csv(df):
-
-    os.makedirs("processed_data", exist_ok=True)
-
+    dir_path = os.path.abspath("processed_data")
+    os.makedirs(dir_path, exist_ok=True)
+    file_path = os.path.join(dir_path, "data_gabungan.csv")
+    
     df.to_csv(
-        "processed_data/data_gabungan.csv",
+        file_path,
         index=False
     )
 
@@ -14,11 +15,12 @@ def load_csv(df):
 
 
 def load_database(df):
-
-    os.makedirs("database", exist_ok=True)
+    dir_path = os.path.abspath("database")
+    os.makedirs(dir_path, exist_ok=True)
+    db_path = os.path.join(dir_path, "penyakit_global.db")
 
     conn = sqlite3.connect(
-        "database/penyakit_global.db"
+        db_path
     )
 
     df.to_sql(

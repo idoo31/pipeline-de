@@ -11,7 +11,8 @@ from pipeline.load import (
 )
 
 from visualization.dashboard import (
-    top10_penyakit
+    top10_penyakit,
+    perbandingan_4_penyakit_4_negara
 )
 
 def main():
@@ -43,6 +44,9 @@ def main():
 
     # VISUALIZATION
     top10_penyakit(data_gabungan)
+    
+    # Menambahkan pemanggilan fungsi visualisasi perbandingan 4 penyakit
+    perbandingan_4_penyakit_4_negara(data_gabungan, tahun_analisis=2019)
 
     print("\nPIPELINE SELESAI")
 
