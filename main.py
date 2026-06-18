@@ -10,10 +10,7 @@ from pipeline.load import (
     load_database
 )
 
-from visualization.dashboard import (
-    top10_penyakit,
-    perbandingan_4_penyakit_4_negara
-)
+from visualization.dashboard import tampilkan_dashboard
 
 def main():
 
@@ -21,32 +18,29 @@ def main():
     print("DATA ENGINEERING PIPELINE")
     print("=" * 60)
 
-    # EXTRACT
+    # 1. EXTRACT
     df1, df2 = extract()
 
-    # TRANSFORM
+    # 2. TRANSFORM
     df1_long = transform_dataset1(df1)
     df2_long = transform_dataset2(df2)
 
-    # INTEGRATE
+    # 3. INTEGRATE
     data_gabungan = integrate(
         df1_long,
         df2_long
     )
 
-    # VALIDATE
+    # 4. VALIDATE
     validate(data_gabungan)
 
-    # LOAD
+    # 5. LOAD
     load_csv(data_gabungan)
-
     load_database(data_gabungan)
 
-    # VISUALIZATION
-    top10_penyakit(data_gabungan)
-    
-    # Menambahkan pemanggilan fungsi visualisasi perbandingan 4 penyakit
-    perbandingan_4_penyakit_4_negara(data_gabungan, tahun_analisis=2019)
+    # 6. VISUALIZATION
+    # Menampilkan ketiga visualisasi sekaligus dalam 1 window
+    tampilkan_dashboard(data_gabungan, tahun_analisis=2019, negara="Indonesia")
 
     print("\nPIPELINE SELESAI")
 
